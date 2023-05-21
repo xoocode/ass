@@ -1,6 +1,6 @@
 {
   "name": "@xoocode/assist.js",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "A simple utility library to streamline and simplify your JavaScript development process.",
   "main": "index.js",
   "scripts": {
