@@ -1,4 +1,4 @@
-# ASS - Utility Library
+# ASSIST JS - Utility Library
 A simple utility library to streamline and simplify your JavaScript development process.
 
 ## Installation
@@ -6,7 +6,7 @@ A simple utility library to streamline and simplify your JavaScript development 
 Install via npm:
 
 ```bash
-npm install ass
+npm install assist-js
 ```
 
 ## Functions
@@ -54,7 +54,7 @@ npm install ass
 Import the library into your project and use the functions as needed:
 
 ```javascript
-import ass from 'ass'
+import ass from 'assist-js'
 
 const slug = ass.slugify('Hello World!')
 console.log(slug) // Outputs: "hello-world"
