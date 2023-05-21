@@ -1,0 +1,15 @@
+{
+  "name": "ass",
+  "version": "1.0.0",
+  "description": "A simple utility library to streamline and simplify your JavaScript development process.",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "keywords": [
+    "JavaScript",
+    "Utility"
+  ],
+  "author": "Peter Valenta",
+  "license": "GNU"
+}

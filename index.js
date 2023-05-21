@@ -1,4 +1,4 @@
-const slugify = string => {
+function slugify(string) {
   if (string === undefined || string === null) return ''
 
   return string
@@ -16,7 +16,7 @@ const slugify = string => {
 function unslugify(slug) {
   return slug
     .split('-')
-    .map(word => word.charAt(0).toUpperCase() + word.slice(1))
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
     .join(' ')
 }
 
@@ -60,39 +60,35 @@ function filterItems(contentItems, oldItems, blacklist = []) {
 
   // Creates a unique list of cleaned items with accents removed
   const uniqueCleanedItems = [
-    ...new Set(
-      Object.keys(cleanedToOriginal).map(item =>
-        item.normalize('NFD').replace(/[\u0300-\u036f]/g, '')
-      )
-    )
+    ...new Set(Object.keys(cleanedToOriginal).map((item) => item.normalize('NFD').replace(/[\u0300-\u036f]/g, '')))
   ]
 
   // Filters and returns the final list of items
   return (
     uniqueCleanedItems
       // Filters out empty items
-      .filter(item => item)
+      .filter((item) => item)
       // Removes items that are already in the list
-      .filter(item => !oldItems.includes(item))
+      .filter((item) => !oldItems.includes(item))
       // Removes items that are too long
-      .filter(item => item.length < 32)
+      .filter((item) => item.length < 32)
       // Removes items that are too short
-      .filter(item => item.length > 2)
+      .filter((item) => item.length > 2)
       // Removes items that match the blacklist
-      .filter(item => !blacklist.some(regex => regex.test(item)))
+      .filter((item) => !blacklist.some((regex) => regex.test(item)))
       // Maps the cleaned items back to their original values
-      .map(item => cleanedToOriginal[item])
+      .map((item) => cleanedToOriginal[item])
   )
 }
 
 // Extracts items from content by matching brackets
 function getItemsFromContent(content) {
   // Matches all items within brackets and removes the brackets
-  return content.match(/\[(.*?)\]/g).map(item => item.slice(1, -1))
+  return content.match(/\[(.*?)\]/g).map((item) => item.slice(1, -1))
 }
 
 function parseObjectsFromText(content, properties) {
-  const regexStr = properties.map(prop => `${prop}\\s?['"]?\\s?:([^,}\n]*)`).join('.*')
+  const regexStr = properties.map((prop) => `${prop}\\s?['"]?\\s?:([^,}\n]*)`).join('.*')
   const regex = new RegExp(regexStr, 'gi')
   let match
   const result = []
@@ -144,7 +140,7 @@ function removeDuplicatesFromArrays({ compare = null, arrays }) {
   const seenValues = new Set()
   const result = []
 
-  const isDuplicate = item => {
+  const isDuplicate = (item) => {
     const value = compare ? item[compare] : item
     if (seenValues.has(value)) {
       return true
@@ -155,7 +151,7 @@ function removeDuplicatesFromArrays({ compare = null, arrays }) {
   }
 
   for (const array of arrays) {
-    const deduplicatedArray = array.filter(item => !isDuplicate(item))
+    const deduplicatedArray = array.filter((item) => !isDuplicate(item))
     result.push(deduplicatedArray)
   }
 
@@ -165,7 +161,7 @@ function removeDuplicatesFromArrays({ compare = null, arrays }) {
 function removeDuplicatesFromArray(array, compare = null) {
   const seenValues = new Set()
 
-  const isDuplicate = item => {
+  const isDuplicate = (item) => {
     const value = compare ? item[compare] : item
     if (seenValues.has(value)) {
       return true
@@ -175,11 +171,11 @@ function removeDuplicatesFromArray(array, compare = null) {
     }
   }
 
-  const deduplicatedArray = array.filter(item => !isDuplicate(item))
+  const deduplicatedArray = array.filter((item) => !isDuplicate(item))
   return deduplicatedArray
 }
 
-const decodeHtmlEntities = text => {
+const decodeHtmlEntities = (text) => {
   const entitiesMap = {
     '&amp;': '&',
     '&lt;': '<',
@@ -208,7 +204,7 @@ const decodeHtmlEntities = text => {
 
   return text.replace(
     /&(amp|lt|gt|quot|#39|nbsp|ndash|mdash|hellip|eacute|egrave|ecirc|ouml|auml|uuml|aring|oslash|laquo|raquo|copy|reg|trade|#x2026);/g,
-    match => {
+    (match) => {
       return entitiesMap[match] || match
     }
   )
@@ -241,12 +237,7 @@ function error(...args) {
 function post(...args) {
   if (process.env.NODE_ENV === 'development') {
     if (typeof args[0] === 'string') {
-      console.log(
-        '%cPOST %c' + args[0],
-        'color: blue; font-weight: bold;',
-        'color: yellow;',
-        ...args.slice(1)
-      )
+      console.log('%cPOST %c' + args[0], 'color: blue; font-weight: bold;', 'color: yellow;', ...args.slice(1))
     } else {
       console.log(...args)
     }
@@ -255,12 +246,7 @@ function post(...args) {
 function get(...args) {
   if (process.env.NODE_ENV === 'development') {
     if (typeof args[0] === 'string') {
-      console.log(
-        '%cGET %c' + args[0],
-        'color: blue; font-weight: bold;',
-        'color: yellow;',
-        ...args.slice(1)
-      )
+      console.log('%cGET %c' + args[0], 'color: blue; font-weight: bold;', 'color: yellow;', ...args.slice(1))
     } else {
       console.log(...args)
     }
@@ -275,19 +261,19 @@ function throwApiError(error, message = '') {
   }
 }
 
-const toTitleCase = str => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
-const toUpperCase = str => str.toUpperCase()
-const toLowerCase = str => str.toLowerCase()
-const toCamelCase = str =>
+const toTitleCase = (str) => str.charAt(0).toUpperCase() + str.slice(1).toLowerCase()
+const toUpperCase = (str) => str.toUpperCase()
+const toLowerCase = (str) => str.toLowerCase()
+const toCamelCase = (str) =>
   str
     .split(' ')
     .map((word, index) => (index === 0 ? word.toLowerCase() : toTitleCase(word)))
     .join('')
-const toPascalCase = str => str.split(' ').map(toTitleCase).join('')
-const toHyphenCase = str => str.split(' ').join('-')
-const toSnakeCase = str => str.split(' ').join('_')
-const toDotCase = str => str.split(' ').join('.')
-const toSentenceCase = str => toTitleCase(str)
+const toPascalCase = (str) => str.split(' ').map(toTitleCase).join('')
+const toHyphenCase = (str) => str.split(' ').join('-')
+const toSnakeCase = (str) => str.split(' ').join('_')
+const toDotCase = (str) => str.split(' ').join('.')
+const toSentenceCase = (str) => toTitleCase(str)
 
 function getRandomLoremIpsum({ minLength = 8, maxLength = 20, textCase = 'sentenceCase' } = {}) {
   const loremIpsum =
