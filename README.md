@@ -23,6 +23,7 @@ npm install @xoocode/assist.js
 - toCamelCase(text): Convert text to camelCase.
 - toPascalCase(text): Convert text to PascalCase.
 - toHyphenCase(text): Convert text to hyphen-case.
+- toUpperHyphenCase(text): Convert text to UPPER-HYPHEN-CASE.
 - toSnakeCase(text): Convert text to snake_case.
 - toDotCase(text): Convert text to dot.case.
 - toSentenceCase(text): Convert text to Sentence case.

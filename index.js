@@ -274,6 +274,7 @@ const toHyphenCase = (str) => str.split(' ').join('-')
 const toSnakeCase = (str) => str.split(' ').join('_')
 const toDotCase = (str) => str.split(' ').join('.')
 const toSentenceCase = (str) => toTitleCase(str)
+const toUpperHyphenCase = (str) => str.split(' ').map(toUpperCase).join('-')
 
 function getRandomLoremIpsum({ minLength = 8, maxLength = 20, textCase = 'sentenceCase' } = {}) {
   const loremIpsum =
@@ -348,6 +349,7 @@ export default {
   toPascalCase,
   toHyphenCase,
   toSnakeCase,
+  toUpperHyphenCase,
   toDotCase,
   toSentenceCase,
   getRandomLoremIpsum
