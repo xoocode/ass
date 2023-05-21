@@ -6,7 +6,7 @@ A simple utility library to streamline and simplify your JavaScript development 
 Install via npm:
 
 ```bash
-npm install assist-js
+npm install @xoocode/assist.js
 ```
 
 ## Functions
@@ -54,7 +54,7 @@ npm install assist-js
 Import the library into your project and use the functions as needed:
 
 ```javascript
-import ass from 'assist-js'
+import ass from '@xoocode/assist.js'
 
 const slug = ass.slugify('Hello World!')
 console.log(slug) // Outputs: "hello-world"
