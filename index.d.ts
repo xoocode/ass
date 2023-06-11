@@ -13,6 +13,7 @@ export declare function decodeHtmlEntities(text: string): string
 export declare function escapeRegExp(string: string): string
 export declare function log(...args: unknown[]): void
 export declare function info(...args: unknown[]): void
+export declare function dev(...args: unknown[]): void
 export declare function warn(...args: unknown[]): void
 export declare function error(...args: unknown[]): void
 export declare function post(...args: unknown[]): void
