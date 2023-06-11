@@ -59,9 +59,7 @@ function filterItems(contentItems, oldItems, blacklist = []) {
   }, {})
 
   // Creates a unique list of cleaned items with accents removed
-  const uniqueCleanedItems = [
-    ...new Set(Object.keys(cleanedToOriginal).map((item) => item.normalize('NFD').replace(/[\u0300-\u036f]/g, '')))
-  ]
+  const uniqueCleanedItems = [...new Set(Object.keys(cleanedToOriginal).map((item) => item.normalize('NFD').replace(/[\u0300-\u036f]/g, '')))]
 
   // Filters and returns the final list of items
   return (
@@ -199,15 +197,12 @@ const decodeHtmlEntities = (text) => {
     '&copy;': '©',
     '&reg;': '®',
     '&trade;': '™',
-    '&#x2026;': '…'
+    '&#x2026;': '…',
   }
 
-  return text.replace(
-    /&(amp|lt|gt|quot|#39|nbsp|ndash|mdash|hellip|eacute|egrave|ecirc|ouml|auml|uuml|aring|oslash|laquo|raquo|copy|reg|trade|#x2026);/g,
-    (match) => {
-      return entitiesMap[match] || match
-    }
-  )
+  return text.replace(/&(amp|lt|gt|quot|#39|nbsp|ndash|mdash|hellip|eacute|egrave|ecirc|ouml|auml|uuml|aring|oslash|laquo|raquo|copy|reg|trade|#x2026);/g, (match) => {
+    return entitiesMap[match] || match
+  })
 }
 
 function escapeRegExp(string) {
@@ -222,6 +217,16 @@ function log(...args) {
 function info(...args) {
   if (process.env.NODE_ENV === 'development') {
     console.info(...args)
+  }
+}
+
+function dev(...args) {
+  if (process.env.NODE_ENV === 'development') {
+    if (typeof args[0] === 'string') {
+      console.log('%cDEV%c' + args[0], 'font-size: 20px; font-weight: 600; background: red; color: white; border-radius: 4px; padding: 2px 4px; float: left; display: inline;', 'font-size: 20px;', ...args.slice(1))
+    } else {
+      console.log(...args)
+    }
   }
 }
 function warn(...args) {
@@ -337,6 +342,7 @@ export default {
   escapeRegExp,
   log,
   info,
+  dev,
   warn,
   error,
   post,
@@ -352,5 +358,5 @@ export default {
   toUpperHyphenCase,
   toDotCase,
   toSentenceCase,
-  getRandomLoremIpsum
+  getRandomLoremIpsum,
 }
